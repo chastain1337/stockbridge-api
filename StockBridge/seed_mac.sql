@@ -4,9 +4,9 @@ GO
 CREATE DATABASE [StockBridge]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'Omobono', FILENAME = N'\Users\Shared\mobono.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'Omobono', FILENAME = N'/Users/Shared/stockbridge.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'Omobono_log', FILENAME = N'\Users\Shared\mobono.mdf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'Omobono_log', FILENAME = N'/Users/Shared/stockbridge_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [StockBridge] SET COMPATIBILITY_LEVEL = 130
 GO
