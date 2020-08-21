@@ -1,16 +1,29 @@
 ﻿<Properties StartupConfiguration="{4461C779-AB9B-4168-A043-34EEEBFDD5D9}|StockBridge">
   <MonoDevelop.Ide.ItemProperties.StockBridge PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="StockBridge/seed_windows.sql">
+  <MonoDevelop.Ide.Workbench ActiveDocument="StockBridge/seed_pc.sql">
     <Files>
-      <File FileName="StockBridge/seed_mac.sql" Line="7" Column="49" />
-      <File FileName="StockBridge/seed_windows.sql" Line="1" Column="1" />
+      <File FileName="StockBridge/appsettings.json" Line="14" Column="15" />
+      <File FileName="StockBridge/Controllers/EmployeeController.cs" Line="38" Column="25" />
+      <File FileName="StockBridge/Repositories/EmployeeRepository.cs" Line="40" Column="1" />
+      <File FileName="StockBridge/Repositories/IEmployeeRepository.cs" Line="1" Column="1" />
+      <File FileName="StockBridge/Repositories/BaseRepository.cs" Line="13" Column="13" />
+      <File FileName="StockBridge/Startup.cs" Line="1" Column="1" />
+      <File FileName="StockBridge/Models/Employee/Authenticate.cs" Line="1" Column="1" />
+      <File FileName="StockBridge/seed_mac.sql" Line="1" Column="1" />
+      <File FileName="StockBridge/seed_pc.sql" Line="28" Column="46" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="StockBridge" expanded="True">
             <Node name="StockBridge" expanded="True">
-              <Node name="seed_windows.sql" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Employee" expanded="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+              <Node name="Repositories" expanded="True" />
+              <Node name="seed_pc.sql" selected="True" />
             </Node>
           </Node>
         </State>
@@ -20,7 +33,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/chastain/stockbridge/stockbridge-api/StockBridge/Repositories/BaseRepository.cs" relfile="StockBridge/Repositories/BaseRepository.cs" line="14" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

@@ -39,6 +39,14 @@ namespace StockBridge.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        [Route("Test")]
+        public IActionResult Test()
+        {
+            return Ok(new { testWas = "success" });
+        }
+
+        [HttpGet]
         [Route("GetEmployeeRoles")]
         public IActionResult GetEmployeeRoles()
         {
