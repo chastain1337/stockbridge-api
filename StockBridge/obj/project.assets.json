@@ -4008,24 +4008,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/chastain/.nuget/packages/": {}
+    "C:\\Users\\jchastain\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/chastain/Desktop/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
+      "projectUniqueName": "C:\\Users\\jchastain\\source\\repos\\StockBridge_Backend\\StockBridge\\StockBridge.csproj",
       "projectName": "StockBridge",
-      "projectPath": "/Users/chastain/Desktop/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
-      "packagesPath": "/Users/chastain/.nuget/packages/",
-      "outputPath": "/Users/chastain/Desktop/stockbridge/stockbridge-api/StockBridge/obj/",
+      "projectPath": "C:\\Users\\jchastain\\source\\repos\\StockBridge_Backend\\StockBridge\\StockBridge.csproj",
+      "packagesPath": "C:\\Users\\jchastain\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jchastain\\source\\repos\\StockBridge_Backend\\StockBridge\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/chastain/.config/NuGet/NuGet.Config"
+        "C:\\Users\\jchastain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4077,7 +4079,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

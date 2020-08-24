@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/Users/chastain/.dotnet/store/|arch|/|tfm|",
-      "/Users/chastain/.nuget/packages"
+      "C:\\Users\\jchastain\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\jchastain\\.nuget\\packages"
     ]
   }
 }
