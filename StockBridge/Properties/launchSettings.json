@@ -17,7 +17,6 @@
     },
     "StockBridge": {
       "commandName": "Project",
-      "launchBrowser": true,
       "applicationUrl": "http://localhost:30281",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

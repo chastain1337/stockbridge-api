@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qa4VoQ9ipfUjGsD3DEB4q6uGXvUIHys5kyTtPUdt6zgMvibYMCrkElyXyVomACW+1DI//zd78xmG/wv1rowefA==",
+  "dgSpecHash": "UYXUQ76qEEf3YR+2s1i05danc+J9Kldn2K333+c3Or/32DxKz1RXlYSf5ZcMqkKDnXAQnhMof7XkOFWvBkahmQ==",
   "success": true,
-  "projectFilePath": "/Users/chastain/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
+  "projectFilePath": "/Users/chastain/Desktop/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
   "expectedPackageFiles": [
     "/Users/chastain/.nuget/packages/dapper/2.0.35/dapper.2.0.35.nupkg.sha512",
     "/Users/chastain/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.7/microsoft.aspnetcore.authentication.jwtbearer.3.1.7.nupkg.sha512",

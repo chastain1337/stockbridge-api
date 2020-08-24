@@ -106,5 +106,11 @@ namespace StockBridge.Controllers
 
             return Ok(new LoggedInEmployee(employee, tokenString));
         }
+
+        //[HttpPost("Add")]
+        //public IActionResult Add(List<Employee> employees)
+        //{
+        //    _employeeRepository.
+        //}
     }
 }

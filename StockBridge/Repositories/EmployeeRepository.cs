@@ -44,5 +44,10 @@ namespace StockBridge.Repositories
                     return employee;
                 }).FirstOrDefault();
         }
+
+        public void Add(List<Employee> employees)
+        {
+            
+        }
     }
 }

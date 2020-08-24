@@ -15,6 +15,7 @@ namespace StockBridge.Models.Employee
         public Role Role { get; set; }
         public DateTime UpdatedDate { get; set; }
         public double AvailableVacationHours { get; set; }
-        public double BaseRate { get; set; }
+        public double BaseRate { get; set; } 
+        //public Department Department { get; set; }
     }
 }

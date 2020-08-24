@@ -4013,11 +4013,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/chastain/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
+      "projectUniqueName": "/Users/chastain/Desktop/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
       "projectName": "StockBridge",
-      "projectPath": "/Users/chastain/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
+      "projectPath": "/Users/chastain/Desktop/stockbridge/stockbridge-api/StockBridge/StockBridge.csproj",
       "packagesPath": "/Users/chastain/.nuget/packages/",
-      "outputPath": "/Users/chastain/stockbridge/stockbridge-api/StockBridge/obj/",
+      "outputPath": "/Users/chastain/Desktop/stockbridge/stockbridge-api/StockBridge/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/chastain/.config/NuGet/NuGet.Config"

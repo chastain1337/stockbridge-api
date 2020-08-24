@@ -9,5 +9,6 @@ namespace StockBridge.Repositories
         public IEnumerable<Employee> GetEmployees();
         public Employee GetEmployeeById(int id);
         public Employee GetEmployeeByUsername(string username);
+        public void Add(List<Employee> employees);
     }
 }
