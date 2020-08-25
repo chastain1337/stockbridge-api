@@ -1,22 +1,24 @@
 ﻿<Properties StartupConfiguration="{4461C779-AB9B-4168-A043-34EEEBFDD5D9}|StockBridge">
   <MonoDevelop.Ide.ItemProperties.StockBridge PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="StockBridge/Controllers/EmployeeController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="StockBridge/Repositories/EmployeeRepository.cs">
     <Files>
       <File FileName="StockBridge/appsettings.json" Line="14" Column="15" />
-      <File FileName="StockBridge/Controllers/EmployeeController.cs" Line="110" Column="24" />
+      <File FileName="StockBridge/Controllers/EmployeeController.cs" Line="110" Column="1" />
+      <File FileName="StockBridge/Repositories/BaseRepository.cs" Line="17" Column="2" />
+      <File FileName="StockBridge/Repositories/EmployeeRepository.cs" Line="31" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="StockBridge" expanded="True">
             <Node name="StockBridge" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="EmployeeController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True">
                 <Node name="Employee" expanded="True" />
               </Node>
-              <Node name="Repositories" expanded="True" />
+              <Node name="Repositories" expanded="True">
+                <Node name="EmployeeRepository.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
