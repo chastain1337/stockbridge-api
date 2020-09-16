@@ -2,7 +2,7 @@
 {
     public class LoggedInEmployee
     {
-        public int ID { get; }
+        public int? ID { get; }
         public string FirstName { get; }
         public string LastName { get; }
         public string UserName { get; }
