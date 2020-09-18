@@ -20,7 +20,7 @@ namespace StockBridge.Helpers
                 return null;
             }
 
-            var employee = _employeeRepository.GetEmployeeByUsername(username);
+            var employee = _employeeRepository.GetEmployeeByUsername(username).Data;
 
             if (employee == null) return null;
 

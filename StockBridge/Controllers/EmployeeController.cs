@@ -35,46 +35,40 @@ namespace StockBridge.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("Test")]
-        public IActionResult Test()
-        {
-            return Ok(new { testWas = "success" });
-        }
 
         [HttpGet]
         [Route("GetEmployeeRoles")]
         public IActionResult GetEmployeeRoles()
         {
-            var model = _employeeRepository.GetEmployeeRoles().ToArray();
-            return Ok(model);
+            return DbHttpResponse(_employeeRepository.GetEmployeeRoles());
         }
 
         [HttpGet]
         [Route("GetEmployeeDepartments")]
         public IActionResult GetEmployeeDepartments()
         {
-            var model = _employeeRepository.GetEmployeeDepartments().ToArray();
-            return Ok(model);
+            return DbHttpResponse(_employeeRepository.GetEmployeeDepartments());
         }
 
         [Route("GetEmployees")]
-        public IEnumerable<Employee> GetEmployees()
+        public IActionResult GetEmployees(DateTime? modifiedAfter = null)
         {
-            return _employeeRepository.GetEmployees().ToArray();
+            //DateTime? dt = null;
+            //if (modifiedAfter != null) dt = DateTime.Parse(modifiedAfter);
+            return DbHttpResponse(_employeeRepository.GetEmployees(modifiedAfter));
         }
+        
 
         [Route("GetEmployees/{id?}")]
-        public Employee GetEmployees(int id)
+        public IActionResult GetEmployees(int id)
         {
-            return _employeeRepository.GetEmployeeById(id);
+            return DbHttpResponse(_employeeRepository.GetEmployeeById(id));
         }
 
         [Route("GetEmployees/{username?}")]
-        public Employee GetEmployeeByUsername(string username)
+        public IActionResult GetEmployeeByUsername(string username)
         {
-            return _employeeRepository.GetEmployeeByUsername(username);
+            return DbHttpResponse(_employeeRepository.GetEmployeeByUsername(username));
         }
 
         [Route("GetLoggedInEmployee")]
@@ -82,9 +76,9 @@ namespace StockBridge.Controllers
         {
             var res = new DbResponse<LoggedInEmployee>();
             var employee = _employeeRepository.GetEmployeeById(ActiveEmployeeID);
-            if (employee != null)
+            if (employee.Data != null)
             {
-                res.Data = new LoggedInEmployee(employee,
+                res.Data = new LoggedInEmployee(employee.Data,
                     Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", ""));
                 return Ok(res);
             }
@@ -97,25 +91,19 @@ namespace StockBridge.Controllers
         [HttpPost("UpsertEmployees")]
         public IActionResult UpsertEmployees([FromBody] List<UpsertEmployeeRequest> employees)
         {
-            var res = _employeeRepository.UpsertEmployees(employees,ActiveEmployeeID);
-            if (res.Success) return Ok(res);
-            return BadRequest(res);
+            return DbHttpResponse(_employeeRepository.UpsertEmployees(employees, ActiveEmployeeID));
         }
 
         [HttpPost("UpsertRoles")]
         public IActionResult UpsertRoles([FromBody] List<UpsertRoleRequest> roles)
         {
-            var res = _employeeRepository.UpsertRoles(roles, ActiveEmployeeID);
-            if (res.Success) return Ok(res);
-            return BadRequest(res);
+            return DbHttpResponse(_employeeRepository.UpsertRoles(roles, ActiveEmployeeID));
         }
 
         [HttpPost("UpsertDepartments")]
         public IActionResult UpsertDepartments([FromBody] List<UpsertDepartmentRequest> departments)
         {
-            var res = _employeeRepository.UpsertDepartments(departments, ActiveEmployeeID);
-            if (res.Success) return Ok(res);
-            return BadRequest(res);
+            return DbHttpResponse(_employeeRepository.UpsertDepartments(departments, ActiveEmployeeID));
         }
 
 

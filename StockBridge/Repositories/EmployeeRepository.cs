@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
@@ -9,46 +10,57 @@ namespace StockBridge.Repositories
 {
     public class EmployeeRepository:BaseRepository,IEmployeeRepository
     {
-        public IEnumerable<Role> GetEmployeeRoles()
+        public DbResponse<IEnumerable<Role>> GetEmployeeRoles()
         {
-            return _db.Query<Role>("SELECT * FROM StockBridge.Employee.Role WHERE DeletedFlag = 0");
+            return Try( () => _db.Query<Role>("SELECT * FROM StockBridge.Employee.Role WHERE DeletedFlag = 0"));
         }
 
-        public IEnumerable<Department> GetEmployeeDepartments()
+        public DbResponse<IEnumerable<Department>> GetEmployeeDepartments()
         {
-            return _db.Query<Department>("SELECT * FROM StockBridge.Employee.Department WHERE DeletedFlag = 0");
+            return Try( () => _db.Query<Department>("SELECT * FROM StockBridge.Employee.Department WHERE DeletedFlag = 0"));
         }
 
-        public IEnumerable<Employee> GetEmployees()
+        public DbResponse<IEnumerable<Employee>> GetEmployees(DateTime? modifiedAfter = null)
         {
-            return _db.Query<Role,Department,Employee,Employee>("StockBridge.Employee.GetEmployees", (role,department,employee) =>
+            return Try( () => _db.Query<Role, Department, Employee, Employee>("StockBridge.Employee.GetEmployees", (role, department, employee) =>
             {
                 employee.Role = role;
                 employee.Department = department;
                 return employee;
+            }, new { @LastTimeUpdated = modifiedAfter }, commandType: CommandType.StoredProcedure));
+        }
+
+        public DbResponse<Employee> GetEmployeeById(int id)
+        {
+            return Try( () =>
+            
+                _db.Query<Role, Department, Employee, Employee>(sql: "StockBridge.Employee.GetEmployees",
+                    param: new {@Id = id}, map: (role, department, employee) =>
+                    {
+                        employee.Role = role;
+                        employee.Department = department;
+                        return employee;
+                    }).FirstOrDefault()
+            );
+            
+        }
+
+        public DbResponse<Employee> GetEmployeeByUsername(string username)
+        {
+            return Try( () =>
+            {
+                return _db.Query<Role, Department, Employee, Employee>(
+                    sql: "StockBridge.Employee.GetEmployees",
+                    param: new {@Username = username},
+                    map: (role, department, employee) =>
+                    {
+                        employee.Role = role;
+                        employee.Department = department;
+                        return employee;
+                    },
+                    commandType: CommandType.StoredProcedure)
+                    .FirstOrDefault();
             });
-        }
-
-        public Employee GetEmployeeById(int id)
-        {
-            return _db.Query<Role,Department,Employee,Employee>(
-                sql: "StockBridge.Employee.GetEmployees", param:
-                new {@Id = id}, map: (role, department, employee) => { 
-                    employee.Role = role;
-                    employee.Department = department;
-                    return employee;
-                }).FirstOrDefault();
-        }
-
-        public Employee GetEmployeeByUsername(string username)
-        {
-            return _db.Query<Role, Department, Employee, Employee>(
-                sql: "StockBridge.Employee.GetEmployees", param:
-                new { @Username = username }, map: (role, department, employee) => {
-                    employee.Role = role;
-                    employee.Department = department;
-                    return employee;
-                },commandType: CommandType.StoredProcedure).FirstOrDefault();
         }
 
         public DbResponse<List<int>> UpsertEmployees(List<UpsertEmployeeRequest> employees,int userId)

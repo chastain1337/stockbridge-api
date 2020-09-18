@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StockBridge.Repositories
 {
@@ -20,16 +21,25 @@ namespace StockBridge.Repositories
 
         public DbResponse<List<int>> Upsert<T>(string procName, List<T> parametersList)
         {
-            var res = new DbResponse<List<int>> { Data = new List<int>() };
+            return Try(transaction =>
+            {
+                return parametersList.Select(setOfParams =>
+                    _db.Query<int>(procName, setOfParams, transaction, commandType: CommandType.StoredProcedure)
+                        .FirstOrDefault()).ToList();
+            });
+        }
+
+        public DbResponse<T> Try<T>(Func<IDbTransaction,T> func)
+        {
             _db.Open();
-            var transaction = _db.BeginTransaction();
+            var transaction =_db.BeginTransaction();
+            var res = new DbResponse<T>();
             try
             {
-                parametersList.ForEach(setOfParams =>
-                {
-                    var id = _db.Query<int>(procName, setOfParams, transaction, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                    res.Data.Add(id);
-                });
+                res.Data = func(transaction);
+                transaction.Commit();
+                _db.Close();
+                return res;
             }
             catch (Exception e)
             {
@@ -39,10 +49,27 @@ namespace StockBridge.Repositories
                 _db.Close();
                 return res;
             }
-            transaction.Commit();
-            _db.Close();
+            
+        }
 
-            return res;
+        public DbResponse<T> Try<T>(Func<T> func)
+        {
+            _db.Open();
+            var res = new DbResponse<T>();
+            try
+            {
+                res.Data = func();
+                _db.Close();
+                return res;
+            }
+            catch (Exception e)
+            {
+                res.Errors.Add(e.Message);
+                res.Success = false;
+                _db.Close();
+                return res;
+            }
+            
         }
     }
 }
