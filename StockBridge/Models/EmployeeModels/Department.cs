@@ -1,8 +1,7 @@
 ﻿using System;
-
-namespace StockBridge.Models.Employee
+namespace StockBridge.Models.EmployeeModels
 {
-    public class Role
+    public class Department
     {
         public int ID { get; set; }
         public string Name { get; set; }

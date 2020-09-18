@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StockBridge.Models.Employee
+namespace StockBridge.Models.EmployeeModels
 {
     public class Employee
     {

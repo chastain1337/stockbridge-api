@@ -1,4 +1,4 @@
-﻿namespace StockBridge.Models.Employee
+﻿namespace StockBridge.Models.EmployeeModels
 {
     public class Authenticate
     {

@@ -8,7 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using StockBridge.Helpers;
-using StockBridge.Repositories;
+using StockBridge.Repositories.EmployeeRepositories;
+using StockBridge.Repositories.ProductRepositories;
+using StockBridge.Repositories.VendorRepositories;
+using StockBridge.Repositories.WarehouseRepositories;
 
 namespace StockBridge
 {
@@ -26,6 +29,9 @@ namespace StockBridge
         {
             services.AddControllers();
             services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IWarehouseRepository, WarehouseRepository>();
+            services.AddSingleton<IVendorRepository, VendorRepository>();
+            services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<IEmployeeHelper, EmployeeHelper>();
             
             // Map AppSettings json file to class

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StockBridge.Models.Employee.ProcRequests
+namespace StockBridge.Models.EmployeeModels.ProcRequests
 {
     public class UpsertEmployeeRequest
     {

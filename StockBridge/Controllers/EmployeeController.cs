@@ -11,9 +11,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using StockBridge.Helpers;
-using StockBridge.Models.Employee;
-using StockBridge.Models.Employee.ProcRequests;
+using StockBridge.Models.EmployeeModels;
+using StockBridge.Models.EmployeeModels.ProcRequests;
 using StockBridge.Repositories;
+using StockBridge.Repositories.EmployeeRepositories;
 
 namespace StockBridge.Controllers
 {
@@ -53,8 +54,6 @@ namespace StockBridge.Controllers
         [Route("GetEmployees")]
         public IActionResult GetEmployees(DateTime? modifiedAfter = null)
         {
-            //DateTime? dt = null;
-            //if (modifiedAfter != null) dt = DateTime.Parse(modifiedAfter);
             return DbHttpResponse(_employeeRepository.GetEmployees(modifiedAfter));
         }
         
@@ -125,7 +124,7 @@ namespace StockBridge.Controllers
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[] {new Claim(ClaimTypes.Name, employee.ID.ToString())}),
+                Subject = new ClaimsIdentity(new Claim[] {new Claim(type: ClaimTypes.Name, employee.ID.ToString())}),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)

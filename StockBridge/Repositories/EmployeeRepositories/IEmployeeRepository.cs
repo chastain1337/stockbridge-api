@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using StockBridge.Models.Employee;
-using StockBridge.Models.Employee.ProcRequests;
+using StockBridge.Models.EmployeeModels;
+using StockBridge.Models.EmployeeModels.ProcRequests;
 
-namespace StockBridge.Repositories
+namespace StockBridge.Repositories.EmployeeRepositories
 {
     public interface IEmployeeRepository
     {

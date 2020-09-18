@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
-using StockBridge.Models.Employee;
-using StockBridge.Repositories;
+using StockBridge.Models.EmployeeModels;
+using StockBridge.Repositories.EmployeeRepositories;
 
 namespace StockBridge.Helpers
 {

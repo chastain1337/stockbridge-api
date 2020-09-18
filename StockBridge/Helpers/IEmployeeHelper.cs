@@ -1,4 +1,4 @@
-﻿using StockBridge.Models.Employee;
+﻿using StockBridge.Models.EmployeeModels;
 
 namespace StockBridge.Helpers
 {
