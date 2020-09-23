@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using StockBridge.Models.WarehouseModels.ProcRequests;
 using StockBridge.Repositories.WarehouseRepositories;
 
 
@@ -21,12 +23,17 @@ namespace StockBridge.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         [Route("GetWarehouseLocations")]
         public IActionResult GetWarehouseLocations()
         {
             return DbHttpResponse(_warehouseRepository.GetLocations());
         }
 
+        [HttpPost]
+        [Route("UpsertWarehouseLocations")]
+        public IActionResult UpsertWarehouseLocations(List<UpsertLocationRequest> locations)
+        {
+            return DbHttpResponse(_warehouseRepository.UpsertWarehouseLocations(locations, ActiveEmployeeID));
+        }
     }
 }

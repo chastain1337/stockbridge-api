@@ -12,17 +12,17 @@ namespace StockBridge.Repositories.EmployeeRepositories
     {
         public DbResponse<IEnumerable<Role>> GetEmployeeRoles()
         {
-            return Try( () => _db.Query<Role>("SELECT * FROM StockBridge.Employee.Role WHERE DeletedFlag = 0"));
+            return Try( (_db) => _db.Query<Role>("SELECT * FROM StockBridge.Employee.Role WHERE DeletedFlag = 0"));
         }
 
         public DbResponse<IEnumerable<Department>> GetEmployeeDepartments()
         {
-            return Try( () => _db.Query<Department>("SELECT * FROM StockBridge.Employee.Department WHERE DeletedFlag = 0"));
+            return Try( (_db) => _db.Query<Department>("SELECT * FROM StockBridge.Employee.Department WHERE DeletedFlag = 0"));
         }
 
         public DbResponse<IEnumerable<Employee>> GetEmployees(DateTime? modifiedAfter = null)
         {
-            return Try( () => _db.Query<Role, Department, Employee, Employee>("StockBridge.Employee.GetEmployees", (role, department, employee) =>
+            return Try( (_db) => _db.Query<Role, Department, Employee, Employee>("StockBridge.Employee.GetEmployees", (role, department, employee) =>
             {
                 employee.Role = role;
                 employee.Department = department;
@@ -32,7 +32,7 @@ namespace StockBridge.Repositories.EmployeeRepositories
 
         public DbResponse<Employee> GetEmployeeById(int id)
         {
-            return Try( () =>
+            return Try( (_db) =>
             
                 _db.Query<Role, Department, Employee, Employee>(sql: "StockBridge.Employee.GetEmployees",
                     param: new {@Id = id}, map: (role, department, employee) =>
@@ -47,7 +47,7 @@ namespace StockBridge.Repositories.EmployeeRepositories
 
         public DbResponse<Employee> GetEmployeeByUsername(string username)
         {
-            return Try( () =>
+            return Try( (_db) =>
             {
                 return _db.Query<Role, Department, Employee, Employee>(
                     sql: "StockBridge.Employee.GetEmployees",

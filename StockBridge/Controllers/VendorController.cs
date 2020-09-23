@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using StockBridge.Models.WarehouseModels.ProcRequests;
 using StockBridge.Repositories.VendorRepositories;
 
 
@@ -34,5 +36,18 @@ namespace StockBridge.Controllers
             return DbHttpResponse(_vendorRepository.GetVendors());
         }
 
+        [HttpPost]
+        [Route("UpsertOrderingMethods")]
+        public IActionResult UpsertOrderingMethods(List<UpsertOrderingMethodRequest> methods)
+        {
+            return DbHttpResponse(_vendorRepository.UpsertOrderingMethods(methods, ActiveEmployeeID));
+        }
+
+        [HttpPost]
+        [Route("UpsertVendors")]
+        public IActionResult UpsertVendors(List<UpsertVendorRequest> vendors)
+        {
+            return DbHttpResponse(_vendorRepository.UpsertVendors(vendors, ActiveEmployeeID));
+        }
     }
 }

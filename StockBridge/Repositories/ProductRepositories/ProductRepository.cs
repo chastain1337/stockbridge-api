@@ -12,7 +12,7 @@ namespace StockBridge.Repositories.ProductRepositories
     {
         public DbResponse<List<Product>> GetProducts(DateTime? modifiedAfter)
         {
-            return Try(() => _db.Query<Location, Product, Product>("StockBridge.Product.GetProducts", (location, product) =>
+            return Try((_db) => _db.Query<Location, Product, Product>("StockBridge.Product.GetProducts", (location, product) =>
             {
                 product.Location = location;
                 return product;

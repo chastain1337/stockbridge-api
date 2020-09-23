@@ -10,66 +10,77 @@ namespace StockBridge.Repositories
 {
     public abstract class BaseRepository
     {
-        private readonly string _dbConnectionString;
-        public readonly IDbConnection _db;
+        //private readonly string _dbConnectionString;
+        //public readonly IDbConnection _db;
+        private readonly string cs;
         protected BaseRepository()
         {
-            //_dbConnectionString = "Server=localhost;Database=StockBridge;User Id=sa;Password=White434$;";
-            _dbConnectionString =               "Server=\"(localdb)\\MSSQLLocalDB\";Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            _db = new SqlConnection(_dbConnectionString);
+            //const string _dbConnectionString = "Server=localhost;Database=StockBridge;User Id=sa;Password=White434$;";
+            cs = "Server=\"(localdb)\\MSSQLLocalDB\";Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;MultipleActiveResultSets=true";
+            //_db = new SqlConnection(cs);
         }
 
         public DbResponse<List<int>> Upsert<T>(string procName, List<T> parametersList)
         {
-            return Try(transaction =>
+            return Try((transaction,db) =>
             {
                 return parametersList.Select(setOfParams =>
-                    _db.Query<int>(procName, setOfParams, transaction, commandType: CommandType.StoredProcedure)
+                    db.Query<int>(procName, setOfParams, transaction, commandType: CommandType.StoredProcedure)
                         .FirstOrDefault()).ToList();
             });
         }
 
-        public DbResponse<T> Try<T>(Func<IDbTransaction,T> func)
+        public DbResponse<T> Try<T>(Func<IDbTransaction, IDbConnection, T> func)
         {
-            _db.Open();
-            var transaction =_db.BeginTransaction();
+            using var db = new SqlConnection(cs);
             var res = new DbResponse<T>();
             try
             {
-                res.Data = func(transaction);
-                transaction.Commit();
-                _db.Close();
-                return res;
+                db.Open();
+                var transaction = db.BeginTransaction();
+                try
+                {
+                    res.Data = func(transaction, db);
+                    transaction.Commit();
+                    db.Close();
+                    return res;
+                }
+                catch (Exception e)
+                {
+                    res.Errors.Add(e.Message);
+                    res.Success = false;
+                    transaction.Rollback();
+                    db.Close();
+                    return res;
+                }
             }
             catch (Exception e)
             {
                 res.Errors.Add(e.Message);
                 res.Success = false;
-                transaction.Rollback();
-                _db.Close();
+                db.Close();
                 return res;
             }
-            
         }
 
-        public DbResponse<T> Try<T>(Func<T> func)
+        public DbResponse<T> Try<T>(Func<IDbConnection,T> func)
         {
-            _db.Open();
+            using var db = new SqlConnection(cs);
             var res = new DbResponse<T>();
             try
             {
-                res.Data = func();
-                _db.Close();
+                //_db.Open();
+                res.Data = func(db);
+                //_db.Close();
                 return res;
             }
             catch (Exception e)
             {
                 res.Errors.Add(e.Message);
                 res.Success = false;
-                _db.Close();
+                //_db.Close();
                 return res;
             }
-            
         }
     }
 }
