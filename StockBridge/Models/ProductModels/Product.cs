@@ -16,10 +16,10 @@ namespace StockBridge.Models.ProductModels
         public string Description { get; set; }
         public string PartNumber { get; set; }
         public string OrderingPartNumber { get; set; }
-        public Vendor PrimaryVendor { get; set; }
-        public Vendor SecondaryVendor { get; set; }
+        public int PrimaryVendor { get; set; }
+        public int SecondaryVendor { get; set; }
         public double? LastUnitCost { get; set; }
-        public Location Location { get; set; }
+        public int Location { get; set; }
         public int CasePack { get; set; }
         public double? Length_IN { get; set; }
         public double? Width_IN { get; set; }

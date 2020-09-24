@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using StockBridge.Models.ProductModels;
+using StockBridge.Models.ProductModels.ProcRequests;
 using StockBridge.Repositories.ProductRepositories;
 
 namespace StockBridge.Controllers
@@ -25,6 +28,20 @@ namespace StockBridge.Controllers
         public IActionResult GetProducts(DateTime? modifiedAfter = null)
         {
             return DbHttpResponse( _productRepository.GetProducts(modifiedAfter) );
+        }
+
+        [HttpPost]
+        [Route("UpsertProducts")]
+        public IActionResult UpsertProducts(List<UpsertProductRequest> products)
+        {
+            return DbHttpResponse(_productRepository.UpsertProducts(products, ActiveEmployeeID));
+        }
+
+        [HttpGet]
+        [Route("GetProductViewSettings")]
+        public IActionResult GetProductViewSettings()
+        {
+            return DbHttpResponse(_productRepository.GetProductViewSettings(ActiveEmployeeID));
         }
 
     }
