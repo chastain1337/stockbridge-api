@@ -10,5 +10,6 @@ namespace StockBridge.Repositories.ProductRepositories
         public DbResponse<List<Product>> GetProducts(DateTime? modifiedAfter);
         DbResponse<List<int>> UpsertProducts(List<UpsertProductRequest> products, int activeEmployeeID);
         DbResponse<List<ProductViewSetting>> GetProductViewSettings(int employeeID);
+        DbResponse<List<int>> UpsertProductViewSettings(List<ProductViewSetting> settings, int activeEmployeeID);
     }
 }

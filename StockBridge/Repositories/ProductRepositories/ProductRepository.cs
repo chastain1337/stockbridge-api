@@ -85,5 +85,22 @@ namespace StockBridge.Repositories.ProductRepositories
                     $"SELECT Field, X, Y, Width, Height, Visible FROM StockBridge.Product.ProductViewSettings WHERE EmployeeID = {employeeID}")
                 .ToList());
         }
+
+        public DbResponse<List<int>> UpsertProductViewSettings(List<ProductViewSetting> settings, int activeEmployeeID)
+        {
+            var paramsList = settings.Select(setting =>
+                new
+                {
+                    @ActiveEmployeeID = activeEmployeeID,
+                    @EmployeeID = activeEmployeeID,
+                    @Field = setting.Field,
+                    @X = setting.X,
+                    @Y = setting.Y,
+                    @Width = setting.Width,
+                    @Height = setting.Height,
+                    @Visible = setting.Visible
+                }).ToList();
+            return Upsert("StockBridge.Product.UpsertProductViewSetting", paramsList);
+        }
     }
 }

@@ -44,5 +44,12 @@ namespace StockBridge.Controllers
             return DbHttpResponse(_productRepository.GetProductViewSettings(ActiveEmployeeID));
         }
 
+        [HttpPost]
+        [Route("UpsertProductViewSettings")]
+        public IActionResult UpsertProductViewSettings(List<ProductViewSetting> settings)
+        {
+            return DbHttpResponse(_productRepository.UpsertProductViewSettings(settings, ActiveEmployeeID));
+        }
+
     }
 }
