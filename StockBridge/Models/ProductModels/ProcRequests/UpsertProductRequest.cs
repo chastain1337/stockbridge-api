@@ -23,6 +23,6 @@ namespace StockBridge.Models.ProductModels.ProcRequests
         public int? ShelfCount { get; set; }
         public int Pending { get; set; } = 0;
         public int OnOrder { get; set; } = 0;
-        public List<GenericCustomField> CustomFields { get; set; }
+        public List<ProductCustomField> CustomFields { get; set; }
     }
 }

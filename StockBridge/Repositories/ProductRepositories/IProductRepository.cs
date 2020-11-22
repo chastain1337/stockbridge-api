@@ -11,5 +11,6 @@ namespace StockBridge.Repositories.ProductRepositories
         DbResponse<List<int>> UpsertProducts(List<UpsertProductRequest> products, int activeEmployeeID);
         DbResponse<List<ProductViewSetting>> GetProductViewSettings(int employeeID);
         DbResponse<List<int>> UpsertProductViewSettings(List<ProductViewSetting> settings, int activeEmployeeID);
+        DbResponse<List<int>> UpsertProductCustomFields(List<ProductCustomField> customFields, int activeEmployeeID);
     }
 }

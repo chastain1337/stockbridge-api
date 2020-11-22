@@ -77,6 +77,8 @@ namespace StockBridge.Repositories.VendorRepositories
                                 new
                                 {
                                     @ActiveEmployeeId = activeEmployeeID,
+                                    @ID = cf.ID,
+                                    @DeleteFlag = cf.DeleteFlag,
                                     @VendorID = v.ID,
                                     @SystemName = cf.SystemName,
                                     @FriendlyName = cf.FriendlyName,

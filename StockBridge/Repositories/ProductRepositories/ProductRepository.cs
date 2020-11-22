@@ -13,8 +13,45 @@ namespace StockBridge.Repositories.ProductRepositories
     {
         public DbResponse<List<Product>> GetProducts(DateTime? modifiedAfter)
         {
-            return Try((_db) => _db.Query<Product>("StockBridge.Product.GetProducts", param:new {@ModifiedAfter = modifiedAfter}, commandType: CommandType.StoredProcedure).ToList());
+            return Try(_db =>
+            {
+                var productsList = _db.Query<Product>("StockBridge.Product.GetProducts",
+                    param: new {@ModifiedAfter = modifiedAfter},
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                var modifiedAfterClause = modifiedAfter.HasValue ? $" and DateModified > '{modifiedAfter}'" : "";
+                var productCustomFieldsList =
+                    _db.Query<ProductCustomField>($"select * from StockBridge.Product.CustomField where DeleteFlag = 0{modifiedAfterClause}").ToList();
+                
+                productCustomFieldsList.ForEach(cf =>
+                {
+                    var idx = productsList.FindIndex(p => p.ID == cf.ProductID);
+                    if (idx > -1)
+                    {
+                        productsList[idx].CustomFields.Add(cf);
+                    }
+                });
+                return productsList;
+            });
         }
+
+        public DbResponse<List<int>> UpsertProductCustomFields(List<ProductCustomField> customFields, int activeEmployeeID)
+        {
+            var paramsList = customFields.Select(cf => new
+            {
+                @ActiveEmployeeID = activeEmployeeID,
+                @ID = cf.ID,
+                @DeleteFlag = cf.DeleteFlag,
+                @ProductID = cf.ProductID,
+                @SystemName = cf.SystemName,
+                @FriendlyName = cf.FriendlyName,
+                @Value = cf.Value,
+                @Description = cf.Description
+            }).ToList();
+           
+            return Upsert("StockBridge.Product.UpsertProductCustomField", paramsList);
+        }
+
 
         public DbResponse<List<int>> UpsertProducts(List<UpsertProductRequest> products, int activeEmployeeID)
         {
@@ -45,7 +82,7 @@ namespace StockBridge.Repositories.ProductRepositories
 
             if (res.Success && res.Data.Count == products.Count)
             {
-                //Assign IDs to the new vendors
+                //Assign IDs to the new prodcut fields
                 for (int i = 0; i < res.Data.Count; i++)
                 {
                     products[i].ID = res.Data[i];
@@ -67,6 +104,8 @@ namespace StockBridge.Repositories.ProductRepositories
                                 new
                                 {
                                     @ActiveEmployeeId = activeEmployeeID,
+                                    @ID = cf.ID,
+                                    @DeleteFlag = cf.DeleteFlag,
                                     @ProductID = v.ID,
                                     @SystemName = cf.SystemName,
                                     @FriendlyName = cf.FriendlyName,

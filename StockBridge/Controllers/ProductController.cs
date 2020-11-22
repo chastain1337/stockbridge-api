@@ -51,5 +51,12 @@ namespace StockBridge.Controllers
             return DbHttpResponse(_productRepository.UpsertProductViewSettings(settings, ActiveEmployeeID));
         }
 
+        [HttpPost]
+        [Route("UpsertProductCustomFields")]
+        public IActionResult UpsertProductCustomFields(List<ProductCustomField> customFields)
+        {
+            return DbHttpResponse(_productRepository.UpsertProductCustomFields(customFields, ActiveEmployeeID));
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using StockBridge.Models.VendorModels;
 
 namespace StockBridge.Models.WarehouseModels.ProcRequests
 {
@@ -17,7 +18,7 @@ namespace StockBridge.Models.WarehouseModels.ProcRequests
         public bool? WillChargeFreightForOrders { get; set; }
         public int? LeadTimeBusinessDays { get; set; }
         public bool UseAutoOrdering { get; set; }
-        public List<GenericCustomField> CustomFields { get; set; }
+        public List<VendorCustomField> CustomFields { get; set; }
 
     }
 }

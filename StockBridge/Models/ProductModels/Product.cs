@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StockBridge.Models.WarehouseModels;
 using StockBridge.Models.VendorModels;
 
@@ -33,5 +34,6 @@ namespace StockBridge.Models.ProductModels
         public int Available { get; set; }
         public int ToOrderQuantity { get; set; }
         public int ToOrderAmount { get; set; }
+        public List<ProductCustomField> CustomFields { get; set; } = new List<ProductCustomField>();
     }
 }
