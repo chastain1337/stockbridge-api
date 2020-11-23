@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Routing;
 using StockBridge.Models.ProductModels;
 using StockBridge.Models.ProductModels.ProcRequests;
 using StockBridge.Repositories.ProductRepositories;
@@ -56,6 +57,13 @@ namespace StockBridge.Controllers
         public IActionResult UpsertProductCustomFields(List<ProductCustomField> customFields)
         {
             return DbHttpResponse(_productRepository.UpsertProductCustomFields(customFields, ActiveEmployeeID));
+        }
+
+        [HttpPost]
+        [Route("DeleteProducts")]
+        public IActionResult DeleteProducts(List<int> productIds)
+        {
+            return DbHttpResponse(_productRepository.DeleteProducts(productIds, ActiveEmployeeID));
         }
 
     }

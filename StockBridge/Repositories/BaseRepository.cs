@@ -15,8 +15,8 @@ namespace StockBridge.Repositories
         private readonly string cs;
         protected BaseRepository()
         {
-            cs = "Server=localhost;Database=StockBridge;User Id=sa;Password=StockBridge1234;";
-            //cs = "Server=\"(localdb)\\MSSQLLocalDB\";Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;MultipleActiveResultSets=true";
+            //cs = "Server=localhost;Database=StockBridge;User Id=sa;Password=StockBridge1234;";
+            cs = "Server=\"(localdb)\\MSSQLLocalDB\";Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;MultipleActiveResultSets=true";
             //_db = new SqlConnection(cs);
         }
 

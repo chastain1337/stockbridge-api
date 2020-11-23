@@ -141,5 +141,16 @@ namespace StockBridge.Repositories.ProductRepositories
                 }).ToList();
             return Upsert("StockBridge.Product.UpsertProductViewSetting", paramsList);
         }
+
+        public DbResponse<List<int>> DeleteProducts(List<int> productIDs, int activeEmployeeID)
+        {
+            var res = Try((transaction, db) =>
+            {
+                return productIDs.Select(id =>
+                    db.Query<int>(sql: $"UPDATE StockBridge.Product.Product SET DeleteFlag = 1 WHERE ID = {id}", transaction: transaction)
+                        .FirstOrDefault()).ToList();
+            });
+            return res;
+        }
     }
 }
